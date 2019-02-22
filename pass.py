@@ -21,12 +21,12 @@ import json, sys, getpass
 from Crypto.Hash import SHA256
 
 def passForService(service):
-    passServices = json.load(open("pass.json","r", encoding="utf-8"))
-    hash = SHA256.new()
+    passServices = json.load(open("pass.json","r", encoding="utf-8")) # pass.json - see pass.json for an example
+    hash = SHA256.new() # SHA256 Hashcodes are accepted by most services as Password
     hash.update(passServices[service].encode('utf-8'))
     hash.update(str(hash.hexdigest())
                 .encode('utf-8')
-                + getpass.getpass("Masterpassword:")
+                + getpass.getpass("Masterpassword:") # Only if you know the MP you get the real Password
                 .encode('utf-8'))
     return hash.hexdigest()
 
