@@ -24,7 +24,7 @@ def getPass(service,services):
     hash = SHA256.new()
     mp = checkMasterpass()
     if mp != False:
-        hash.update(mp.encode('utf-8') + services[service].encode('utf-8'))
+        hash.update(mp.encode('utf-8') + services[service]['salt'].encode('utf-8'))
         return hash.hexdigest()
     else:
         return False
@@ -36,19 +36,21 @@ def save(passServices):
 if __name__ == '__main__':
     args = sys.argv
     services = loadPasswds()
-    
-    if sys.argv[1] == 'get': # Get Password to service 
-        
+
+    if sys.argv[1] == 'get': # Get Password to service
+
         passwd = getPass(sys.argv[2],services) # Ask for Password without displaying it in the console
         if passwd != False: # paswd is either False or the password for service
+            split_at = services[sys.argv[2]]['split_at']
+            passwd = passwd[:split_at]
             print(passwd)
-        
+
         else: # Display error message
             print("Masterpassword wrong!")
-    
+
     elif sys.argv[1] == 'set': # Set new Masterpassword
         services = addMasterpass(getpass.getpass("New Masterpassword:"), services)
-    
+
     else: # Invalid parameters : Display usage
         usage = """
         Usage:\n
@@ -56,7 +58,5 @@ if __name__ == '__main__':
         \tset:\tSet Masterpassword
         """
         print(usage)
-    
+
     save(services)
-    
-        
