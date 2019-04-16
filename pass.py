@@ -43,6 +43,8 @@ if __name__ == '__main__':
         if passwd != False: # paswd is either False or the password for service
             split_at = services[sys.argv[2]]['split_at']
             passwd = passwd[:split_at]
+            middle_index = int(len(passwd) / 2)
+            passwd = passwd[:middle_index].upper() + passwd[middle_index-1:]
             print(passwd)
 
         else: # Display error message
@@ -50,7 +52,7 @@ if __name__ == '__main__':
 
     elif sys.argv[1] == 'set': # Set new Masterpassword
         services = addMasterpass(getpass.getpass("New Masterpassword:"), services)
-
+        save(services)
     else: # Invalid parameters : Display usage
         usage = """
         Usage:\n
@@ -58,5 +60,3 @@ if __name__ == '__main__':
         \tset:\tSet Masterpassword
         """
         print(usage)
-
-    save(services)
