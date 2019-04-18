@@ -1,5 +1,5 @@
 #! /usr/bin/python3
-import json, sys, getpass
+import json, sys, getpass, os
 from Crypto.Hash import SHA256
 from Crypto.Hash import SHA512
 
@@ -33,7 +33,11 @@ def save(passServices):
     jsonStr = str(json.dumps(passServices))
     open('pass.json',"w").write(jsonStr)
 
+def check_if_valid():
+	os.system("git pull https://github.com/csdummi/CommandlinePasswordManager.git")
+
 if __name__ == '__main__':
+    check_if_valid()
     args = sys.argv
     services = loadPasswds()
 
