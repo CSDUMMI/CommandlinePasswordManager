@@ -5,7 +5,8 @@ from Crypto.Hash import SHA512
 
 
 def loadPasswds():
-    return json.load(open("pass.json", "r", encoding="utf-8"))
+    pass_path = os.environ['PASS_PY_PATH']
+    return json.load(open(pass_path + "pass.json", "r", encoding="utf-8"))
 
 def addMasterpass(mp,services):
     hash = SHA512.new(mp.encode('utf-8'))
@@ -34,7 +35,9 @@ def save(passServices):
     open('pass.json',"w").write(jsonStr)
 
 def check_if_valid():
-	os.system("git pull https://github.com/csdummi/CommandlinePasswordManager.git")
+	current_dir = os.environ['PWD']
+	os.system("cd $PASS_PY_PATH && git pull https://github.com/csdummi/CommandlinePasswordManager.git")
+	os.system("cd " + current_dir)
 
 if __name__ == '__main__':
     check_if_valid()
