@@ -44,7 +44,17 @@ if __name__ == '__main__':
     args = sys.argv
     services = loadPasswds()
 
-    if sys.argv[1] == 'get': # Get Password to service
+    usage = """
+    Usage:\n
+    \tget <service>:\t Get Password for Service after entering Masterpassword\n
+    \tset:\tSet Masterpassword\n
+    \tlist:\tList all service names\n
+    \tadd <name> <split_at> <salt>:\tAdd new service with <name> and splitted at <spilt_at and using <salt>\n
+    """
+
+    if len(sys.argv) < 2:
+        print(usage)
+    elif sys.argv[1] == 'get': # Get Password to service
 
         passwd = getPass(sys.argv[2],services) # Ask for Password without displaying it in the console
         if passwd != False: # paswd is either False or the password for service
@@ -60,10 +70,31 @@ if __name__ == '__main__':
     elif sys.argv[1] == 'set': # Set new Masterpassword
         services = addMasterpass(getpass.getpass("New Masterpassword:"), services)
         save(services)
+
+
+    elif sys.argv[1] == 'list': #List all services
+        service_names = list(services.keys())
+        service_names.remove('masterpass')
+        for i in service_names:
+            print(i)
+
+    elif sys.argv[1] == 'add': #Add new service
+
+        if len(sys.argv) == 4:
+            name = sys.argv[2]
+            split_at = sys.argv[3]
+            salt = input("Input salt for service {}".format(name))
+        elif len(sys.argv) == 3:
+            name = sys.argv[2]
+            salt = input("Input salt for service {}".format(name))
+            split_at = input("Input split_at for service {}".format(name))
+        else:
+            name = input("Input name of new service!")
+            salt = input("Input salt for service {}".format(name))
+            split_at = input("Input split_at for service {}".format(name))
+
+        services[name] = {'salt':salt,'split_at':int(split_at)}
+        save(services)
+
     else: # Invalid parameters : Display usage
-        usage = """
-        Usage:\n
-        \tget <service>:\t Get Password for Service after entering Masterpassword\n
-        \tset:\tSet Masterpassword
-        """
         print(usage)
