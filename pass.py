@@ -6,7 +6,7 @@ from Crypto.Hash import SHA512
 
 def loadPasswds():
     pass_path = os.environ['PASS_PY_PATH']
-    return json.load(open(pass_path + "pass.json", "r", encoding="utf-8"))
+    return json.load(open(pass_path + "/pass.json", "r", encoding="utf-8"))
 
 def addMasterpass(mp,services):
     hash = SHA512.new(mp.encode('utf-8'))

@@ -1,10 +1,10 @@
-
+#! /bin/bash
 # Add  $PWD to $PATH and do so on every
-echo "export PATH=$PATH:$PWD" >> ~/.bashrc
-echo "export PASS_PY_PATH=$PWD" >> ~/.bashrc
+echo "export PATH=$PATH:'$PWD/'" >> ~/.bashrc
+echo "export PASS_PY_PATH='$PWD/'" >> ~/.bashrc
 
-export PATH=$PATH:$PWD
-export PASS_PY_PATH=$PWD
+export PATH=$PATH:$PWD/
+export PASS_PY_PATH=$PWD/
 
 # Clean up pass.json
 # And backup pass.json in pass_backup.json
