@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['pass.py'],
-             pathex=['/home/joris/Pass'],
+             pathex=['/home/pi/Pass'],
              binaries=[],
              datas=[],
              hiddenimports=[],
