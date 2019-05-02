@@ -18,6 +18,12 @@ And thus you have the principle function
 of this program.
 
 
+# How to install this
+```bash
+./install.sh
+```
+And enter your masterpassword.
+
 # How to use it in the Commandline
 There are these commands
 ```bash
