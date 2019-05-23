@@ -32,10 +32,12 @@ pass list                            List services
         mp = self.check()
         if mp != False:
             hash.update(mp.encode('utf-8') + self.state[service]['salt'].encode('utf-8'))
+            passwd = hash.hexdigest()
+            passwd = passwd[:int(len(passwd)/2)].upper() + passwd[int(len(passwd)/2):]
             try:
-                pyperclip.copy(hash.hexdigest())
+                pyperclip.copy(passwd)
             except:
-                print(hash.hexdigest())
+                print(passwd)
         else:
             print('Masterpassword wrong')
 
