@@ -13,7 +13,7 @@ pass add <name> <split_at> <salt>    Add new service
 pass list                            List services
     """
     def __init__(self):
-        super().__init__('pass.json','get','set','add','list')
+        super().__init__(os.environ['PASS_PY_PATH'] + '/pass.json','get','set','add','list')
         os.system('git pull')
         os.system('git status')
 
