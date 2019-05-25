@@ -14,9 +14,9 @@ pass list                            List services
     """
     def __init__(self):
         super().__init__(os.environ['PASS_PY_PATH'] + '/pass.json','get','set','add','list')
-        os.system('git pull')
-        os.system('git status')
-
+        current = os.environ['PWD']
+        os.system('cd $PASS_PY_PATH && git status && git pull && cd ' + current)
+        
     def check(self):
         mp = getpass.getpass('Masterpassword:')
         hash = SHA512.new(mp.encode('utf-8'))
