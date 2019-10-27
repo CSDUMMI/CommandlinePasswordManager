@@ -32,3 +32,4 @@ pass set				Set Masterpassword
 pass add <name> <split_at> <salt>	Add new service
 pass list				List services
 ```
+# Pass
