@@ -1,5 +1,5 @@
 #! /usr/bin/python3
-import json, sys, getpass, os, pyperclip
+import json, sys, getpass, os
 from Crypto.Hash import SHA256
 from Crypto.Hash import SHA512
 
@@ -62,7 +62,7 @@ if __name__ == '__main__':
             passwd = passwd[:split_at]
             middle_index = int(len(passwd) / 2)
             passwd = passwd[:middle_index].upper() + passwd[middle_index-1:]
-            pyperclip.copy(passwd)
+            print( passwd )
 
         else: # Display error message
             print("Masterpassword wrong!")
